@@ -1,26 +1,18 @@
-# register
-#- username and password 
-# -generate user ID(generate user action)
-
-# login
-# -account and password
-
-
-#bank operstions
-
-#initializing a system
 import random 
 import datetime as dt
 current_datetime = dt.datetime.now()
-amountAllowed= range(10000000)
-currentBalance= range (10000000)
+amountAllow= range(100000)
+currentBalance= (1000000)
     
 database = {
     'Tolu': 'Tolu2020',
     'Fola': 'Fola2021',
-    'John': 'John2022'
+    'John': 'John2022',
+    '': ''
+    
 }
-
+database_new = {}
+access_passwords = ["Tolu2020","Fola2021",'John2022']
 def init():
     isValidOptionSelected = False
     print('Welcome to T Bank')
@@ -37,7 +29,7 @@ def init():
             login()
         elif(haveAccount == 2):
             isValidOptionSelected =True
-            print(register())
+            register()
         else:
             print('You have selescted an invalid option')
         
@@ -51,48 +43,35 @@ def login():
     user_name = input('What is your name? \n')
     accountNumber = generatedAccountNumber()
     password = input('What is your password? \n')
-    if password in database.values():
+    if password in access_passwords:
         bankOperations()
-    
     else:
         print('Invalid password')
-    
-
-
-
-    for accountNumber, userDetails in database.items():
-        if(accountNumberFromUser == generatedAccountNumber):
-            bankOperations()
-        else:
-            print('Invalid account or password')
-    login()
-
-    bankOperations()
-
+        login()    
 def register():
     print('*********Register*************')
     email = input('What is your email? \n')
     first_name = input('what is your first name?\n')
     last_name = input('what is your last name? \n')
     user_name = input('What is your new username? \n')
-    password =input('What is your password? \n')
+    password_1 =input('What is your password? \n')
+        
 
     accountNumber = generatedAccountNumber()
 
-    database[accountNumber] = [first_name, last_name, password]
+    database[accountNumber] = [first_name, last_name, password_1]
     print (generatedAccountNumber())
 
     print('Your account has been created')
     print('Welcome to T bank \n')
     print (first_name, last_name)
-
-    print('***********Login**************')
-    accountNumber =int(input('What is your account number? \n'))
-    
-    if (accountNumber == generatedAccountNumber):
+    print("********Login********")
+    name = input('What is your name? \n')
+    password_2 = input('What is your password? \n')
+    if password_2 == password_1:
         bankOperations()
     else:
-        print('invalid details')
+        register()
 
 def bankOperations():
     print('Welcome')
@@ -125,8 +104,8 @@ def bankOperations():
 
 def withdrawalOperation():
     amount= int(input('Amount \n'))
-    if(amount in amountAllowed):
-        print(currentBalance)
+    if(amount > 100):
+        print(amount + 'Withdrawn')
         print('Thank you for banking with T bank')
     else:
         print ('Insufficient funds')
@@ -135,13 +114,13 @@ def withdrawalOperation():
 
 
 def depositeOperations():
-    depositeAllowed= input('Amount to Deposit \n')
-    if( depositeAllowed in currentBalance):
-        print (currentBalance)
+    depositeAllowed= int(input('Amount to Deposit \n'))
+    if (depositeAllowed > 100):
+        print ('Amount deposited')
         print('Thank you for banking with T bank')
     else:
         print('Amount not allowed please use the bank')
-        new_transaction()    
+    new_transaction()    
 
 
 
@@ -152,11 +131,12 @@ def complaintsOperations():
 
 def updateKYC():
     update1= int(input('Your BVN? \n'))
+    print('Your information will be verified. Thank you')
 
     
     update2 = int(input('Your NIN \n'))
     print('Your information will be verified. Thank you')
-    new_transaction
+    new_transaction()
 
     
 
@@ -168,11 +148,11 @@ def generatedAccountNumber():
     return random.randrange(1111111111,99999999999)
 
 def new_transaction():
-    new_transaction = input('Will you like to perform a new transaction? (1) YES (2) NO \n')
-    if (new_transaction == 1):
+    new_transaction = int(input('Will you like to perform a new transaction? (1) YES (2) NO \n'))
+    if new_transaction ==1:
         bankOperations()
     else:
-        ('Goodbye')
+        exit()
 
 
 
@@ -180,4 +160,3 @@ def new_transaction():
 
 
 init() 
-
